@@ -1,0 +1,224 @@
+{
+  "categories": {
+    "job_boards": {
+      "name": "Job Boards & Marketplaces",
+      "keywords": ["job board", "marketplace", "freelancer", "gigs", "hiring", "talent", "work", "employment", "freelance", "services"],
+      "examples": [
+        {
+          "id": "job_board_basic",
+          "title": "Basic Job Board",
+          "tools": ["Notion", "Super.so", "Tally"],
+          "steps": [
+            "Create a Notion database with columns: Job Title, Company, Location, Salary, Description, Posted Date",
+            "Use Super.so to turn your Notion database into a public website",
+            "Create a Tally form for employers to submit job listings",
+            "Connect Tally submissions to your Notion database via Zapier",
+            "Share your job board URL and start promoting to your target audience"
+          ],
+          "notes": ["Best for under 500 listings", "No payment processing included", "Consider upgrading to Airtable for better filtering"],
+          "links": ["https://super.so/notion-guide", "https://tally.so/help/connect-notion"]
+        },
+        {
+          "id": "freelancer_marketplace",
+          "title": "Freelancer Marketplace",
+          "tools": ["Airtable", "Softr", "Stripe"],
+          "steps": [
+            "Build an Airtable base with freelancer profiles, skills, rates, and portfolios",
+            "Use Softr to create a searchable directory with user authentication",
+            "Integrate Stripe for payment processing between clients and freelancers",
+            "Set up automated email notifications for new bookings",
+            "Launch with 10-20 quality freelancers to build initial traction"
+          ],
+          "notes": ["Stripe takes 2.9% + 30¢ per transaction", "Requires more complex setup but scales better", "Consider adding review/rating system"],
+          "links": ["https://softr.io/templates/freelancer-directory", "https://stripe.com/docs/connect"]
+        }
+      ]
+    },
+    "directories": {
+      "name": "Directories & Listings",
+      "keywords": ["directory", "listing", "local", "business", "professionals", "services", "find", "search", "catalog", "registry"],
+      "examples": [
+        {
+          "id": "local_business_directory",
+          "title": "Local Business Directory",
+          "tools": ["Airtable", "Softr", "Google Maps API"],
+          "steps": [
+            "Create Airtable base with business info: Name, Category, Address, Phone, Website, Description",
+            "Use Softr to build a public directory with search and filtering",
+            "Integrate Google Maps for location display and directions",
+            "Add submission form for businesses to self-register",
+            "Monetize through featured listings or premium placements"
+          ],
+          "notes": ["Google Maps API has usage limits on free tier", "Great for local SEO opportunities", "Consider charging $20-50/month for premium listings"],
+          "links": ["https://softr.io/templates/business-directory", "https://developers.google.com/maps/documentation"]
+        },
+        {
+          "id": "professional_directory",
+          "title": "Professional Network Directory",
+          "tools": ["Notion", "Super.so", "Cal.com"],
+          "steps": [
+            "Build Notion database for professional profiles with expertise, experience, contact info",
+            "Use Super.so to create a searchable public directory",
+            "Integrate Cal.com booking links for each professional",
+            "Create categories and tags for easy filtering (lawyers, doctors, consultants)",
+            "Add testimonials and rating system using Notion relations"
+          ],
+          "notes": ["Works well for niche professional communities", "Cal.com offers free scheduling", "Consider premium verification badges"],
+          "links": ["https://super.so/templates", "https://cal.com/docs"]
+        }
+      ]
+    },
+    "community": {
+      "name": "Community & Social",
+      "keywords": ["community", "forum", "social", "voting", "feedback", "discussion", "chat", "group", "membership", "tribe"],
+      "examples": [
+        {
+          "id": "startup_voting_platform",
+          "title": "Startup Idea Voting Platform",
+          "tools": ["Airtable", "Softr", "Zapier"],
+          "steps": [
+            "Create Airtable base for startup ideas with fields: Title, Description, Category, Votes, Submitted By",
+            "Use Softr to build voting interface with user authentication",
+            "Set up Zapier automation to send weekly digest of top ideas",
+            "Add categories like 'SaaS', 'E-commerce', 'Social Impact'",
+            "Implement leaderboard and badges for top contributors"
+          ],
+          "notes": ["Softr handles user authentication automatically", "Great for building engaged communities", "Consider adding comments via Disqus"],
+          "links": ["https://softr.io/templates/voting-app", "https://zapier.com/apps/airtable/integrations/email"]
+        },
+        {
+          "id": "feedback_board",
+          "title": "Product Feedback Board",
+          "tools": ["Notion", "Super.so", "Tally"],
+          "steps": [
+            "Create Notion database for feature requests with Priority, Status, Votes, User Info",
+            "Use Super.so to display public roadmap and completed features",
+            "Add Tally form for users to submit new feature requests",
+            "Create status workflow: Submitted → Under Review → In Progress → Done",
+            "Set up email notifications for status updates"
+          ],
+          "notes": ["Popular with SaaS companies", "Transparent roadmap builds trust", "Consider integrating with your development workflow"],
+          "links": ["https://super.so/notion-guide", "https://tally.so/help"]
+        }
+      ]
+    },
+    "content": {
+      "name": "Content & Media",
+      "keywords": ["newsletter", "blog", "content", "media", "course", "learning", "education", "publishing", "magazine", "news"],
+      "examples": [
+        {
+          "id": "newsletter_platform",
+          "title": "Newsletter with Archives",
+          "tools": ["Ghost", "ConvertKit", "Zapier"],
+          "steps": [
+            "Set up Ghost blog for newsletter archives and SEO-friendly content",
+            "Use ConvertKit for email delivery and subscriber management",
+            "Connect Ghost and ConvertKit via Zapier for automatic email sending",
+            "Create signup forms and lead magnets to grow subscriber base",
+            "Monetize through sponsorships or premium subscriptions"
+          ],
+          "notes": ["Ghost is excellent for SEO", "ConvertKit has powerful automation", "Great for content creators"],
+          "links": ["https://ghost.org/docs/", "https://help.convertkit.com/"]
+        },
+        {
+          "id": "online_course_platform",
+          "title": "Online Course Platform",
+          "tools": ["Notion", "Super.so", "Gumroad", "Loom"],
+          "steps": [
+            "Create course structure in Notion with modules, lessons, and resources",
+            "Use Super.so to build a beautiful course website",
+            "Upload video lessons to Loom for easy embedding",
+            "Set up Gumroad for payment processing and access control",
+            "Create email sequences for student onboarding and engagement"
+          ],
+          "notes": ["Gumroad handles payments and digital delivery", "Loom is free for up to 25 videos", "Great for knowledge workers"],
+          "links": ["https://help.gumroad.com/", "https://www.loom.com/help"]
+        }
+      ]
+    },
+    "saas_tools": {
+      "name": "SaaS & Productivity Tools",
+      "keywords": ["saas", "tool", "productivity", "automation", "analytics", "dashboard", "workflow", "app", "software", "platform"],
+      "examples": [
+        {
+          "id": "analytics_dashboard",
+          "title": "Analytics Dashboard",
+          "tools": ["Airtable", "Retool", "Google Sheets API"],
+          "steps": [
+            "Set up Airtable as your data warehouse with proper schemas",
+            "Use Retool to build interactive dashboards and admin panels",
+            "Connect external data sources via APIs (Google Analytics, social media)",
+            "Create automated reports and email alerts for key metrics",
+            "Add user authentication and role-based access control"
+          ],
+          "notes": ["Retool offers powerful database integrations", "Great for internal tools and client dashboards", "Can handle complex business logic"],
+          "links": ["https://retool.com/docs/", "https://support.airtable.com/docs/airtable-api"]
+        },
+        {
+          "id": "automation_workflow",
+          "title": "Workflow Automation Tool",
+          "tools": ["Zapier", "Airtable", "Webhooks", "Slack"],
+          "steps": [
+            "Design workflow triggers and actions in Airtable",
+            "Use Zapier to connect multiple apps and automate processes",
+            "Set up webhooks for real-time data synchronization",
+            "Add Slack notifications for important workflow events",
+            "Create user interface for managing and monitoring workflows"
+          ],
+          "notes": ["Zapier has 5000+ app integrations", "Webhooks enable real-time automation", "Popular with operations teams"],
+          "links": ["https://zapier.com/developer/", "https://api.slack.com/messaging/webhooks"]
+        }
+      ]
+    }
+  },
+  "tools_database": {
+    "notion": {
+      "name": "Notion",
+      "category": "Database",
+      "description": "All-in-one workspace for notes, databases, and collaboration",
+      "pricing": "Free for personal, $8/month per user for teams",
+      "best_for": ["Content management", "Simple databases", "Team collaboration"],
+      "integrations": ["Super.so", "Zapier", "Tally"]
+    },
+    "airtable": {
+      "name": "Airtable",
+      "category": "Database",
+      "description": "Spreadsheet-database hybrid with powerful API",
+      "pricing": "Free for basic, $20/month per user for teams",
+      "best_for": ["Complex data relationships", "Scalable databases", "API integrations"],
+      "integrations": ["Softr", "Zapier", "Retool"]
+    },
+    "super": {
+      "name": "Super.so",
+      "category": "Website Builder",
+      "description": "Turn Notion pages into fast, SEO-friendly websites",
+      "pricing": "$12/month per site",
+      "best_for": ["Quick websites from Notion", "SEO optimization", "Custom domains"],
+      "integrations": ["Notion", "Google Analytics"]
+    },
+    "softr": {
+      "name": "Softr",
+      "category": "App Builder",
+      "description": "Build web apps from Airtable data with user authentication",
+      "pricing": "Free for basic, $24/month for professional",
+      "best_for": ["User portals", "Directories", "Membership sites"],
+      "integrations": ["Airtable", "Stripe", "Google Sheets"]
+    },
+    "tally": {
+      "name": "Tally",
+      "category": "Forms",
+      "description": "Create beautiful forms that feel like documents",
+      "pricing": "Free for unlimited forms",
+      "best_for": ["Data collection", "Surveys", "Lead generation"],
+      "integrations": ["Notion", "Airtable", "Zapier"]
+    },
+    "zapier": {
+      "name": "Zapier",
+      "category": "Automation",
+      "description": "Connect and automate workflows between 5000+ apps",
+      "pricing": "Free for 100 tasks/month, $19.99/month for premium",
+      "best_for": ["Workflow automation", "Data synchronization", "Integration hub"],
+      "integrations": ["Almost everything"]
+    }
+  }
+}

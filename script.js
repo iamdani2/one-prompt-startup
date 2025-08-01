@@ -4,6 +4,7 @@ class OnePromptStartup {
         this.setupEventListeners();
         this.setupTheme();
         this.loadHistory();
+        this.loadCategories();
     }
 
     initializeElements() {
@@ -28,6 +29,10 @@ class OnePromptStartup {
         // History elements
         this.historySection = document.getElementById('historySection');
         this.historyList = document.getElementById('historyList');
+        
+        // RAG elements
+        this.categoriesContainer = document.getElementById('categoriesContainer');
+        this.responseSource = document.getElementById('responseSource');
     }
 
     setupEventListeners() {
@@ -197,6 +202,9 @@ class OnePromptStartup {
             this.linksSection.classList.add('hidden');
         }
         
+        // Show response source information
+        this.displayResponseSource(data);
+        
         // Store current result for copying
         this.currentResult = { prompt: originalPrompt, ...data };
         
@@ -331,6 +339,62 @@ class OnePromptStartup {
                 document.body.removeChild(toast);
             }, 300);
         }, 3000);
+    }
+
+    // Load and display categories
+    async loadCategories() {
+        try {
+            const response = await fetch('/api/categories');
+            if (response.ok) {
+                const categories = await response.json();
+                this.displayCategories(categories);
+            }
+        } catch (error) {
+            console.error('Failed to load categories:', error);
+        }
+    }
+
+    displayCategories(categories) {
+        this.categoriesContainer.innerHTML = '';
+        
+        categories.forEach(category => {
+            const categoryBtn = document.createElement('button');
+            categoryBtn.className = 'px-4 py-2 text-sm font-medium bg-primary/10 text-primary rounded-full hover:bg-primary/20 transition-colors';
+            categoryBtn.textContent = category.name;
+            categoryBtn.title = `${category.example_count} examples available`;
+            
+            categoryBtn.addEventListener('click', () => {
+                // Fill input with a representative keyword
+                const keyword = category.keywords[0];
+                this.promptInput.value = `${keyword} for small businesses`;
+                this.generateIdea();
+            });
+            
+            this.categoriesContainer.appendChild(categoryBtn);
+        });
+    }
+
+    displayResponseSource(data) {
+        if (!this.responseSource) return;
+        
+        if (data.source === 'rag') {
+            const confidence = Math.round(data.rag_match.confidence * 100);
+            this.responseSource.innerHTML = `
+                <span class="inline-flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    Instant response (${confidence}% match) • Curated template
+                </span>
+            `;
+        } else if (data.source === 'openai') {
+            this.responseSource.innerHTML = `
+                <span class="inline-flex items-center gap-1">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    AI generated • Custom response
+                </span>
+            `;
+        } else {
+            this.responseSource.innerHTML = '';
+        }
     }
 }
 

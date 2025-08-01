@@ -1,10 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const RAGEngine = require('./lib/rag-engine');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Initialize RAG Engine
+const ragEngine = new RAGEngine();
 
 // Middleware
 app.use(cors());
@@ -24,11 +28,24 @@ app.post('/api/generate', async (req, res) => {
     return res.status(400).json({ error: 'Prompt is required' });
   }
 
-  if (!process.env.OPENAI_API_KEY) {
-    return res.status(500).json({ error: 'OpenAI API key not configured' });
-  }
-
   try {
+    // First, try RAG system for instant, curated responses
+    const ragResponse = ragEngine.generateEnhancedResponse(prompt);
+    
+    if (ragResponse && ragResponse.rag_match.confidence > 0.3) {
+      // High confidence RAG match - return immediately
+      console.log(`RAG match found for "${prompt}" with confidence ${ragResponse.rag_match.confidence}`);
+      return res.status(200).json({
+        ...ragResponse,
+        source: 'rag',
+        response_time: 'instant'
+      });
+    }
+
+    // Fallback to OpenAI for novel or complex queries
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({ error: 'OpenAI API key not configured and no RAG match found' });
+    }
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -101,7 +118,11 @@ Keep steps actionable and realistic for someone building their first startup.`
     result.notes = result.notes || [];
     result.links = result.links || [];
 
-    return res.status(200).json(result);
+    return res.status(200).json({
+      ...result,
+      source: 'openai',
+      response_time: 'ai_generated'
+    });
     
   } catch (error) {
     console.error('Error calling OpenAI:', error);
@@ -112,9 +133,51 @@ Keep steps actionable and realistic for someone building their first startup.`
   }
 });
 
+// Get category suggestions
+app.get('/api/categories', (req, res) => {
+  try {
+    const suggestions = ragEngine.getCategorySuggestions();
+    res.json(suggestions);
+  } catch (error) {
+    console.error('Error getting categories:', error);
+    res.status(500).json({ error: 'Failed to load categories' });
+  }
+});
+
+// Get popular tool combinations
+app.get('/api/popular-tools', (req, res) => {
+  try {
+    const combos = ragEngine.getPopularToolCombos();
+    res.json(combos);
+  } catch (error) {
+    console.error('Error getting popular tools:', error);
+    res.status(500).json({ error: 'Failed to load popular tools' });
+  }
+});
+
+// Get tool information
+app.get('/api/tools/:toolName', (req, res) => {
+  try {
+    const toolInfo = ragEngine.getToolInfo(req.params.toolName);
+    if (toolInfo) {
+      res.json(toolInfo);
+    } else {
+      res.status(404).json({ error: 'Tool not found' });
+    }
+  } catch (error) {
+    console.error('Error getting tool info:', error);
+    res.status(500).json({ error: 'Failed to load tool information' });
+  }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    rag_loaded: !!ragEngine.knowledgeBase.categories,
+    categories_count: Object.keys(ragEngine.knowledgeBase.categories || {}).length
+  });
 });
 
 // Start server
