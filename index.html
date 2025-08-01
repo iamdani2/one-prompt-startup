@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Prompt Startup | Build Your Idea in Minutes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#ec4899'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="p-4 sm:p-6">
+            <div class="max-w-4xl mx-auto flex justify-between items-center">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                    One Prompt Startup
+                </h1>
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                    <svg id="sunIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="moonIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex items-center justify-center p-4 sm:p-6">
+            <div class="w-full max-w-2xl space-y-8">
+                <!-- Hero Text -->
+                <div class="text-center space-y-4">
+                    <h2 class="text-4xl sm:text-6xl font-extrabold text-gray-900 dark:text-white">
+                        Build <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">anything</span>
+                    </h2>
+                    <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300">
+                        Tell us what you want to build, get the stack and steps
+                    </p>
+                </div>
+
+                <!-- Example Prompts -->
+                <div class="text-center space-y-2">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Try one of these:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button class="example-prompt px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                            job board for barbers
+                        </button>
+                        <button class="example-prompt px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                            voting app for startup ideas
+                        </button>
+                        <button class="example-prompt px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                            directory of local artists
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Section -->
+                <div class="space-y-4">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="promptInput"
+                            placeholder="A tool to vote on startup ideas..."
+                            class="w-full px-6 py-4 text-lg rounded-2xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-primary focus:outline-none transition-colors"
+                        >
+                    </div>
+                    <button 
+                        id="generateBtn"
+                        class="w-full px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-primary to-secondary rounded-2xl hover:from-primary/90 hover:to-secondary/90 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/25 disabled:opacity-50 disabled:transform-none"
+                    >
+                        <span id="btnText">Generate My Stack ✨</span>
+                        <div id="btnLoader" class="hidden flex items-center justify-center">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Generating...
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Output Section -->
+                <div id="outputSection" class="hidden space-y-4">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 space-y-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Your Build Plan</h3>
+                            <button 
+                                id="copyBtn"
+                                class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        
+                        <!-- Tools Section -->
+                        <div id="toolsSection" class="space-y-3">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">🛠️ Recommended Stack</h4>
+                            <div id="toolsList" class="flex flex-wrap gap-2">
+                                <!-- Tools will be populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Steps Section -->
+                        <div id="stepsSection" class="space-y-3">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">📋 Build Steps</h4>
+                            <ol id="stepsList" class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <!-- Steps will be populated here -->
+                            </ol>
+                        </div>
+
+                        <!-- Notes Section -->
+                        <div id="notesSection" class="hidden space-y-3">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">💡 Pro Tips</h4>
+                            <div id="notesList" class="text-gray-700 dark:text-gray-300">
+                                <!-- Notes will be populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Links Section -->
+                        <div id="linksSection" class="hidden space-y-3">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">🔗 Helpful Resources</h4>
+                            <div id="linksList" class="space-y-2">
+                                <!-- Links will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Results -->
+                <div id="historySection" class="hidden space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Previous Ideas</h3>
+                    <div id="historyList" class="space-y-2">
+                        <!-- History items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="p-4 sm:p-6 text-center">
+            <p class="text-gray-500 dark:text-gray-400">
+                Made with ☕ in Tel Aviv | 
+                <a href="#" class="text-primary hover:underline">nocode.co.il</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: one-prompt-startup
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false  # This will be set manually in Render dashboard
+    healthCheckPath: /health
